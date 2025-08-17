@@ -1,0 +1,13 @@
+{
+  "realm": "nac",
+  "enabled": true,
+  "users": [],
+  "clients": [
+    {
+      "clientId": "tabanah-frontend",
+      "publicClient": true,
+      "redirectUris": ["http://localhost:5173/*"],
+      "webOrigins": ["*"]
+    }
+  ]
+}

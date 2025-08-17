@@ -1,0 +1,27 @@
+services:
+  db:
+    image: postgres:14
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: tabanah
+    ports: ["5432:5432"]
+    volumes:
+      - dbdata:/var/lib/postgresql/data
+
+  backend:
+    build: ../backend
+    environment:
+      DATABASE_URL: postgresql+psycopg2://postgres:postgres@db:5432/tabanah
+      JWT_SECRET: change_me
+    depends_on: [db]
+    ports: ["8000:8080"]
+
+  frontend:
+    build: ../frontend
+    environment:
+      VITE_API_BASE: http://localhost:8000
+    depends_on: [backend]
+    ports: ["5173:5173"]
+
+volumes:
+  dbdata:
